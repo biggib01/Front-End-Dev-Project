@@ -9,7 +9,7 @@ app.set('views', './views')
 app.set('view engine', 'ejs')
 
 app.get("/", function (req,res){
-    res.render('index');
+    res.render('kitchen');
 })
 
 app.listen(3000, function () {
