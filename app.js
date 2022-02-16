@@ -1,18 +1,25 @@
-const express = require("express");
+const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
+
 const app = express();
-const bodyParser = require('body-parser');
+const port = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({ extended: true }));
+require('dotenv').config();
 
-app.use(express.static('public'))
-app.set('views', './views')
-app.set('view engine', 'ejs')
+app.use(express.urlencoded({extended:true}));
+app.use(express.static('public'));
+app.use(expressLayouts);
 
-app.get("/", function (req,res){
-    res.render('index');
+app.set('layout', './index');
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res) => {
+    res.render('index')
 })
 
-app.listen(3000, function () {
+// const routes = require('./server/routes/recipeRoutes.js')
+// app.use('/', routes);
 
-console.log("server listening on port 3000");
-})
+app.listen( port , ["192.168.1.109", "localhost" ],() => {
+    console.log(`Listening to requests on http://localhost:${port}`);
+  });
