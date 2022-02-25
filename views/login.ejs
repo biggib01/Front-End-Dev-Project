@@ -3,41 +3,38 @@
 <head>
     <%- include('partials/head'); %> 
 </head>
-<body>
+<body style="
+    background-image: url('/img/bg.png');
+    background-color: rgba(255, 255, 255, 0.6);
+    background-blend-mode: lighten;
+    background-attachment: fixed;
+    background-size: 65%;">
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-md">
             <a class="navbar-brand" href="/">Restaurant Project</a>
         </div>
     </nav>
 
-    <div class="center">
-        <form class="form-inline">
-            <div class="form-group text-center">
-              <h4>Please enter your seat</h4>
-            </div>
-            <div class="form-group row">
-                <div class="col-6">
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>A</option>
-                        <option>B</option>
-                        <option>C</option>
-                        <option>D</option>
-                    </select>
-                </div>
-                <div class="col-6">
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-            </div>
-        </form>
-    </div>
     <div class="testDiv">
-        <%- include('partials/menu') %> 
+        <div class="simple-login-container">
+            <h2>Login</h2>
+            <div class="row" style="margin-top: 10%;">
+                <div class="col-md-12 form-group">
+                    <input type="text" class="form-control" placeholder="Username">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <input type="password" placeholder="Enter your Password" class="form-control">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5%;">
+                <div class="col-md-12 form-group">
+                    <input type="submit" class="btn btn-block btn-login" placeholder="Enter your Password" >
+                </div>
+            </div>
+        </div>
     </div>
 
     <%- include('partials/footer') %> 
