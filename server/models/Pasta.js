@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const categorySchema = new mongoose.Schema({
+const pastaSchema = new mongoose.Schema({
     name: {
         type: String,
         required: 'This fild is required',
@@ -15,4 +15,4 @@ const categorySchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Category', categorySchema)
+module.exports = mongoose.model('Pasta', pastaSchema)

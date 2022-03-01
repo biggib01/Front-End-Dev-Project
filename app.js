@@ -13,12 +13,12 @@ app.use(expressLayouts);
 app.set('layout', './index');
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-    res.render('index')
-})
+// app.get('/', (req, res) => {
+//     res.render('index')
+// })
 
-// const routes = require('./server/routes/recipeRoutes.js')
-// app.use('/', routes);
+const routes = require('./server/routes/recipeRoutes.js')
+app.use('/', routes);
 
 app.listen( port , ["192.168.1.109", "localhost" ],() => {
     console.log(`Listening to requests on http://localhost:${port}`);
