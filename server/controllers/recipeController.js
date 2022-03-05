@@ -2,7 +2,14 @@ require('../models/database');
 const Category = require('../models/Category')
 const Pasta = require('../models/Pasta')
 const Drinks = require('../models/Drinks')
+const Order = require('../models/orderList')
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
 
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
 
 /**
  * GET /
@@ -11,17 +18,19 @@ const Drinks = require('../models/Drinks')
 exports.homepage = async(req, res) => {
 
     try {
-        const limitNumber = 8;
-        const categories = await Category.find({}).limit(limitNumber)
         
-        res.render('index', {title: 'Home page', categories:categories})
+
+        const limitNumber = 8;
+        const order = await Order.find({})
+        const categories = await Category.find({}).limit(limitNumber)
+
+        //await categories.forEach(console.dir);
+
+        
+        res.render("index", {categories:categories, orderss:order})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
-
-
-
-    res.render('index');
 }
 
 /**
@@ -33,15 +42,12 @@ exports.pasta = async(req, res) => {
     try {
         const limitNumber = 8;
         const categories = await Pasta.find({}).limit(limitNumber)
+        const order = await Order.find({}).limit(limitNumber)
         
-        res.render('pasta', {title: 'Home page', categories:categories})
+        res.render("pasta", {categories:categories, orderss:order})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
-
-
-
-    res.render('pasta');
 }
 
 /**
@@ -53,41 +59,37 @@ exports.drinks = async(req, res) => {
     try {
         const limitNumber = 8;
         const categories = await Drinks.find({}).limit(limitNumber)
+        const order = await Order.find({}).limit(limitNumber)
         
-        res.render('drinks', {title: 'Home page', categories:categories})
+        res.render('drinks', {title: 'Home page', categories:categories, orderss:order})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
 
-
-
-    res.render('drinks');
 }
 
 async function insertDymmyCategoryData(){
 
     try{
-        await Drinks.insertMany([
+        await Order.insertMany([
             {
-                "name": "PEPSI 1.49L",
-                "image": "https://fs.hut1150.com/drinks-desserts/pepsi-1490ml_pep149-07042021102210.jpg",
-                "price": "40"
+                "TableID": "A1",
+                "orderList": [{
+                    "Pizza": "Veggie - Medium: 1x",
+                    "Pasta": "",
+                    "Drinks": "PEPSI 1.49L: 1x",
+                    "Price": "300 Baht",
+                }],
             },
             {
-                "name": "PEPSI MAX 1.45L",
-                "image": "https://fs.hut1150.com/drinks-desserts/pepsi-max-1450ml-18112020114251.jpg",
-                "price": "40"
-            },
-            {
-                "name": "PEPSI 345 ML",
-                "image": "https://fs.hut1150.com/drinks-desserts/pepsi-345ml-18112020114510.jpg",
-                "price": "20"
-            },
-            {
-                "name": "PEPSI 550 ML",
-                "image": "https://fs.hut1150.com/drinks-desserts/pepsi-550ml-18112020114410.jpg",
-                "price": "25"
-            },
+                "TableID": "C2",
+                "orderList": [{
+                    "Pizza": "Seafood Paradise - Medium: 2x",
+                    "Pasta": "",
+                    "Drinks": "PEPSI 1.49L: 1x",
+                    "Price": "300 Baht",
+                }],
+            }
         ]);
     } catch (error){
         console.log('Error: ' + error)

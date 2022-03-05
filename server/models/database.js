@@ -10,3 +10,4 @@ db.once('open', function(){
 require('./Category');
 require('./Pasta');
 require('./Drinks');
+require('./orderList');
