@@ -10,12 +10,12 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 app.use(expressLayouts);
 
-app.set('layout', './index');
+app.set('layout', './login');
 app.set('view engine', 'ejs');
 
-// app.get('/', (req, res) => {
-//     res.render('index')
-// })
+app.get('/', (req, res) => {
+    res.render('login')
+})
 
 const routes = require('./server/routes/recipeRoutes.js')
 app.use('/', routes);
