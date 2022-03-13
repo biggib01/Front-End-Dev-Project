@@ -1,3 +1,9 @@
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-md">
+            <a class="navbar-brand" href="/">Pizza de</a>
+        </div>
+    </nav>
+
 
     <div class="testDiv">
         <div class="containerr">
@@ -13,7 +19,7 @@
                   </div>
                   
                 </div>
-              </form>
+            </form>
         </div>
     </div>
 
@@ -27,7 +33,7 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            const result = await fetch('/login', {
+            const result = await fetch('/4y0h9WnLw/TjWXpwK9EZ4D7WCZaB9s/2U/sPcnup1do=/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,12 +46,11 @@
 
             if(result.status === 'ok'){
                 console.log("Got token:", result.data)
-                location.href = "http://192.168.1.109:3000/kitchen";
+                location.href = "http://localhost:3001/4y0h9WnLw/TjWXpwK9EZ4D7WCZaB9s/2U/sPcnup1do=/kitchen";
             }else {
                 alert(result.error)
                 
             }
- 
         })
         
     </script>

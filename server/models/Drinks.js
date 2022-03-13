@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const drinksSchema = new mongoose.Schema({
+    ID: {
+        type: Number,
+        required: 'This fild is required',
+    },
     name: {
         type: String,
         required: 'This fild is required',
