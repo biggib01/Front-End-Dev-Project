@@ -43,7 +43,7 @@ jobs:
                mkdir testing
                cp docker-compose.yml testing/docker-compose.yml
                cd testing
-               docker-compose -f docker-compose.yml -H ${{ secrets.HOST_SERVER}} -- down
-               docker-compose -f docker-compose.yml -H ${{ secrets.HOST_SERVER}} -- pull
-               docker-compose -f docker-compose.yml -H ${{ secrets.HOST_SERVER}} -- up -d
+               docker-compose -f docker-compose.yml -H ${{ secrets.HOST_SERVER}} down
+               docker-compose -f docker-compose.yml -H ${{ secrets.HOST_SERVER}} pull
+               docker-compose -f docker-compose.yml -H ${{ secrets.HOST_SERVER}} up -d
                
