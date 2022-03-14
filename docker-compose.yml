@@ -3,6 +3,6 @@ services:
   app:
     container_name: finaldeploy
     restart: always
-    image:  biggib01/project:latest
+    image:  biggib01/project
     ports:
       - "8081:8080"
