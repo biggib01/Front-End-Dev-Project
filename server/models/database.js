@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoodb');
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true});
 
 const db = mongoose.connection;

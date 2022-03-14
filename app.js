@@ -24,10 +24,10 @@ app.use('/4y0h9WnLw/TjWXpwK9EZ4D7WCZaB9s/2U/sPcnup1do=', adminRoutes)
 const userRoutes = require('./server/routes/recipeRoutes.js')
 app.use('/', userRoutes);
 
-app.listen( port , ["192.168.1.102", "localhost" ],() => {
-    console.log(`Listening to requests on http://localhost:${port}`);
-});
-
-// app.listen( port , host,() => {
-//     console.log(`Listening to requests on ${host}:${port}`);
+// app.listen( port , ["192.168.1.102", "localhost" ],() => {
+//     console.log(`Listening to requests on http://localhost:${port}`);
 // });
+
+app.listen( port , host,() => {
+    console.log(`Listening to requests on ${host}:${port}`);
+});
