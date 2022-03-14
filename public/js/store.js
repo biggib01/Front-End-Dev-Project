@@ -24,12 +24,8 @@ async function addCart(id, event){
         })
     }).then((res)=> res.json(), console.log("Sended data"))
 
-    
-
     // if(cart.length == 0){
         
-
-
         // let p = document.createElement("h3")
         // let br = document.createElement("br");
         // let tableID = document.createTextNode(String(table)+"\n")

@@ -1,15 +1,12 @@
-require('../models/database');
-const Category = require('../models/Category')
-const Pasta = require('../models/Pasta')
-const Drinks = require('../models/Drinks')
-const Login = require('../models/Login')
-const Order = require('../models/orderList')
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
-const { countDocuments } = require('../models/Category');
+
 const app = express();
+const {MongoClient} = require('mongodb');
+const mongodb = new MongoClient('mongodb+srv://noice:0970@cluster0.0kscu.mongodb.net/itemList?retryWrites=true&w=majority');
 
 app.use(bodyParser.json())
 
@@ -19,17 +16,23 @@ app.use(bodyParser.json())
  * Homepage
  */
 exports.homepage = async(req, res) => {
-
+    await mongodb.connect();
+    const list = [];
+    const list2 = [];
+    
     try {
-
-        const limitNumber = 8;
-        const order = await Order.find({})
-        const categories = await Category.find({}).limit(limitNumber)
+        const categories = mongodb.db('itemList').collection('categories')
+        const data = await categories.find().forEach(function(obj) {
+            list.push(obj);
+        });
+        const order = mongodb.db('itemList').collection('orders')
+        const data2 = await order.find().forEach(function(obj) {
+            list2.push(obj);
+        });
 
         //await categories.forEach(console.dir);
 
-        
-        res.render('index', {categories:categories, orderss:order})
+        res.render('index', {categories:list, order:list2})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
@@ -40,15 +43,20 @@ exports.homepage = async(req, res) => {
  * Homepage
  */
  exports.home = async(req, res) => {
+    const list = [];
+
     const {table ,food} = req.body;
     console.log(table ,food.name)
 
-    const order = await Order.find({ tableID: table, order: food}).lean();
+    const order = mongodb.db('itemList').collection('orders')
+    const data = await order.find({ tableID: table, order: food}).forEach(function(obj) {
+        list.push(obj);
+    });
 
-    console.log(order)
+    console.log(list)
 
-    if(typeof order != "undefined" && order != null && order.length != null
-    && order.length > 0){
+    if(typeof list != "undefined" && list != null && list.length != null
+    && list.length > 0){
         
     }
 
@@ -71,12 +79,21 @@ exports.homepage = async(req, res) => {
  * Pasta
  */
 exports.pasta = async(req, res) => {
+    await mongodb.connect();
+    const list = [];
+    const list2 = [];
 
     try {
-        const categories = await Pasta.find({})
-        const order = await Order.find({})
+        const categories = mongodb.db('itemList').collection('pastas')
+        const data = await categories.find().forEach(function(obj) {
+            list.push(obj);
+        });
+        const order = mongodb.db('itemList').collection('orders')
+        const data2 = await order.find().forEach(function(obj) {
+            list2.push(obj);
+        });
         
-        res.render('pasta', {categories:categories, orderss:order})
+        res.render('pasta', {categories:list, order:list2})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
@@ -87,12 +104,21 @@ exports.pasta = async(req, res) => {
  * Drinks
  */
 exports.drinks = async(req, res) => {
+    await mongodb.connect();
+    const list = [];
+    const list2 = [];
 
     try {
-        const categories = await Drinks.find({})
-        const order = await Order.find({})
+        const categories = mongodb.db('itemList').collection('drinks')
+        const data = await categories.find().forEach(function(obj) {
+            list.push(obj);
+        });
+        const order = mongodb.db('itemList').collection('orders')
+        const data2 = await order.find().forEach(function(obj) {
+            list2.push(obj);
+        });
         
-        res.render('drinks', {title: 'Home page', categories:categories, orderss:order})
+        res.render('drinks', {categories:list, order:list2})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }

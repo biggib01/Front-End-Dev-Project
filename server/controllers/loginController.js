@@ -1,9 +1,7 @@
-require('../models/database');
-const Category = require('../models/Category')
-const Pasta = require('../models/Pasta')
-const Drinks = require('../models/Drinks')
-const Login = require('../models/Login')
-const Order = require('../models/orderList')
+
+const {MongoClient} = require('mongodb');
+const mongodb = new MongoClient('mongodb+srv://noice:0970@cluster0.0kscu.mongodb.net/itemList?retryWrites=true&w=majority');
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs")
@@ -19,15 +17,19 @@ app.use(bodyParser.json())
  * Kitchen
  */
  exports.kitchenPage = async(req, res) => {
+    await mongodb.connect();
+    const list = [];
 
     try {
-        
-        const order = await Order.find({})
+        const order = mongodb.db('itemList').collection('orders')
+        const data2 = await order.find().forEach(function(obj) {
+            list.push(obj);
+        });
 
         //await categories.forEach(console.dir);
 
         
-        res.render('kitchen', {orderss:order})
+        res.render('kitchen', {orderss:list})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
@@ -37,15 +39,20 @@ app.use(bodyParser.json())
  * Login
  */
  exports.loginpage = async(req, res) => {
+    await mongodb.connect();
+    const list = [];
 
     try {
-        
-        const login = await Login.find({})
+        const order = mongodb.db('itemList').collection('logins')
+        const data2 = await order.find().forEach(function(obj) {
+            list.push(obj);
+        });
+
 
         //await categories.forEach(console.dir);
 
         
-        res.render('login', {login:login})
+        res.render('login', {login:list})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
@@ -56,6 +63,9 @@ app.use(bodyParser.json())
  * Login
  */
  exports.loginpagePost = async(req, res) => {
+
+    await mongodb.connect();
+
     const { username, password} = req.body; 
 
     // if(!username || typeof username != 'string'){
@@ -67,21 +77,21 @@ app.use(bodyParser.json())
     // }
 
     // const password = await bcrypt.hash(plainTextPassword, 10)
+    const login = mongodb.db('itemList').collection('logins')
+    const data2 = await login.findOne({ username });
 
-    const user = await Login.findOne({ username }).lean()
+    if(data2){
+        if( await bcrypt.compare(password, data2.password)){
+            const token = jwt.sign({
+                 id: data2._id, 
+                 username: data2.username
+                }, JWT_SECRET)
+    
+            return res.json({ status: 'ok', data: token})
+        }
 
-    if(!user){
+    }else{
         return res.json({ status: 'error', error: 'Invalid username/password'})
-    }
-
-    if( await bcrypt.compare(password, user.password)){
-        const token = jwt.sign({
-             id: user._id, 
-             username: user.username
-            }, JWT_SECRET)
-
-        return res.json({ status: 'ok', data: token})
-        
     }
 
     // try{
