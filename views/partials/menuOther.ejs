@@ -14,19 +14,18 @@
                                 <!-- Single Product -->
                                 <div class="col-md-6 col-lg-4 col-xl-3" id="product">
                                         <div id="product-1" class="single-product">
-                                                <div class="part-1" style="background-image: url('<%- category.image %>');background-size: 140%;background-repeat: no-repeat;">
-                                                        <form action="/" method="post">
+                                                <div id="<%- category.ID %>">
+                                                        <div class="part-1" style="background-image: url('<%- category.image %>');background-size: 140%;background-repeat: no-repeat;">
+                                                                <span class="new" id="idMenu"><%- category.ID %></span>
                                                                 <ul>
-                                                                        <li><a><i class="bi bi-cart3" id="myBt"></i></a></li>
-                                                                        <li><a><i class="bi bi-heart-fill"></i></a></li>
+                                                                        <button onclick="addCart(this.id)" type="button" class="btn btn-primary" id="<%- category.ID %>"><i class="bi bi-cart3"></i></button>
                                                                 </ul>
-                                                        </form>
-                                                </div>
-                                                <div class="part-2">
-                                                        
-                                                        <h3 class="product-title" id="name"><%- category.name %> </h3>
-                                                        <h4 class="product-price"><%- category.price %> Baht.</h4>
-                                                        <p id="idMenu"><%- categories.id %></p>
+                                                        </div>
+                                                        <div class="part-2">
+                                                                
+                                                                <h3 class="product-title" id="name"><%- category.name %> </h3>
+                                                                <h4 class="product-price" id="price"><%- category.price %> Baht.</h4>
+                                                        </div>
                                                 </div>
                                         </div>
                                 </div>

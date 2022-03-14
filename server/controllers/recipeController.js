@@ -7,7 +7,8 @@ const Order = require('../models/orderList')
 const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const { countDocuments } = require('../models/Category');
 const app = express();
 
 app.use(bodyParser.json())
@@ -39,22 +40,32 @@ exports.homepage = async(req, res) => {
  * Homepage
  */
  exports.home = async(req, res) => {
-    const {tableID} = req.body;
+    const {table ,food} = req.body;
+    console.log(table ,food.name)
 
-    try {
+    const order = await Order.find({ tableID: table, order: food}).lean();
+
+    console.log(order)
+
+    if(typeof order != "undefined" && order != null && order.length != null
+    && order.length > 0){
         
-        const order = await Order.find({ tableID })
-        const categories = await Category.find({ 'name': tableID })
+    }
+
+    // try {
+        
+    //     const order = await Order.find({ tableID })
+    //     const categories = await Category.find({ 'name': tableID })
         
         //await categories.forEach(console.dir);
 
         
-        res.render('index', {categories:categories, orderss:order})
-    }catch (error){
-        res.status(500).send({message: error.message || "Error Occured"});
-    }
-}
+    //     res.render('index', {categories:categories, orderss:order})
+    // }catch (error){
+    //     res.status(500).send({message: error.message || "Error Occured"});
+    // }
 
+}
 /**
  * GET /
  * Pasta

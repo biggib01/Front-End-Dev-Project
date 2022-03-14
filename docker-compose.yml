@@ -1,18 +1,8 @@
-version: '3.9'
+version: '3'
 services:
-  # mongo_db:
-  #   image: mongo:latest
-  #   restart: always
-  #   volumes:
-  #     - mongo_db:/data/db
-
-  api:
-    build: .
-    environment:
-      - PORT: 80
-      - MONGODB_URI: MONGODB_URI = mongodb+srv://noice:0970@cluster0.0kscu.mongodb.net/itemList?retryWrites=true&w=majority
-      - DB_NAME: itemList
-    depends_on:
-      - mongo_db
+  app:
+    container_name: finaldeploy
+    restart: always
+    image:  biggib01/testing:latest
     ports:
-      - "8050:80"
+      - "8080:8080"

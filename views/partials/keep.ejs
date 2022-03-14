@@ -138,3 +138,49 @@
             </div>
     </div>
 </div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <%- include('partials/orderList') %> 
+        </div>
+        <div class="modal-footer">
+        </div>
+        </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" name="Fname" id="modLabel">Food name</h2>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div>
+                            <label for="recipient-name" name="Fdesc" class="col-form-label">Description:</label>
+                            <h3 id="foodDescript"></h3>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" name="Freq" class="col-form-label">Special request:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+
+                    <h2 id="foodQt"><button id="sub" onclick="substract()" class="order-qt-sub">-</button>
+                        <p name="Fqt" style="display: inline;">0</p><button id="add" onclick="addition()" class="order-qt-add">+</button></h2>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button id="closeMod" onclick="closeMod()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="submitMod" onclick="submit()" type="button" class="btn btn-primary">Add to order</button>
+                </div>
+            </div>
+        </div>
+    </div>
