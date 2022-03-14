@@ -36,13 +36,13 @@ jobs:
         with:
           context: .
           push: true
-          tags: biggib01/project
+          tags: biggib01/testing
       -
         name: prepare the docker-compose run
         run: |
-               mkdir project
-               cp docker-compose.yml project/docker-compose.yml
-               cd project
+               mkdir testing
+               cp docker-compose.yml testing/docker-compose.yml
+               cd testing
                docker-compose -H ${{ secrets.HOST_SERVER}} down
                docker-compose -H ${{ secrets.HOST_SERVER}} pull
                docker-compose -H ${{ secrets.HOST_SERVER}} up -d
