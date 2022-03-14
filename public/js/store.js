@@ -13,19 +13,21 @@ async function addCart(id, event){
 
     const orderList = document.getElementById("asd")
 
-    const result = await fetch('/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            table,
-            food
-        })
-    }).then((res)=> res.json(), console.log("Sended data"))
+    // const result = await fetch('/', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         table,
+    //         food
+    //     })
+    // }).then((res)=> res.json(), console.log("Sended data"))
 
-    // if(cart.length == 0){
+    if(cart.length == 0){
         
+        cart.push(food)
+
         // let p = document.createElement("h3")
         // let br = document.createElement("br");
         // let tableID = document.createTextNode(String(table)+"\n")
@@ -39,18 +41,20 @@ async function addCart(id, event){
         // p.appendChild(fprice)
         // p.appendChild(fquan)
         // orderList.appendChild(p)
-    // }else{
-    //     var i = cart.length;
-    //     while(i--) {
-    //         if(foodName == cart[i].name) {
-    //             cart[i].quantity ++;
-    //             break;
-    //         }else{
-    //             cart.push(food)
-    //             break;
-    //         }
-    //     }
-    // }
+    }else{
+        var i = cart.length;
+        while(i--) {
+            if(foodName == cart[i].name) {
+                cart[i].quantity ++;
+                break;
+            }else{
+                cart.push(food)
+                break;
+            }
+        }
+    }
+
+    console.log(cart)
     
     // document.write(
     //     "<div class='col-md-6 col-lg-4 col-xl-3' >"+

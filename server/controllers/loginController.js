@@ -10,6 +10,7 @@ const app = express();
 
 const JWT_SECRET = "Smkdl2w*(@jnlN1902jlknmslAED@*(!)YE@!Njklnhuin2idbni(WHD@HNjkoln"
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
 /**

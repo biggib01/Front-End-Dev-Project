@@ -8,6 +8,7 @@ const app = express();
 const {MongoClient} = require('mongodb');
 const mongodb = new MongoClient('mongodb+srv://noice:0970@cluster0.0kscu.mongodb.net/itemList?retryWrites=true&w=majority');
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
 
@@ -32,7 +33,7 @@ exports.homepage = async(req, res) => {
 
         //await categories.forEach(console.dir);
 
-        res.render('index', {categories:list, order:list2})
+        res.render('index', {categories:list, orderss:list2})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
@@ -49,7 +50,7 @@ exports.homepage = async(req, res) => {
     console.log(table ,food.name)
 
     const order = mongodb.db('itemList').collection('orders')
-    const data = await order.find({ tableID: table, order: food}).forEach(function(obj) {
+    const data = await order.find({ tableID: table, orderss: food}).forEach(function(obj) {
         list.push(obj);
     });
 
@@ -93,7 +94,7 @@ exports.pasta = async(req, res) => {
             list2.push(obj);
         });
         
-        res.render('pasta', {categories:list, order:list2})
+        res.render('pasta', {categories:list, orderss:list2})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
@@ -118,7 +119,7 @@ exports.drinks = async(req, res) => {
             list2.push(obj);
         });
         
-        res.render('drinks', {categories:list, order:list2})
+        res.render('drinks', {categories:list, orderss:list2})
     }catch (error){
         res.status(500).send({message: error.message || "Error Occured"});
     }
